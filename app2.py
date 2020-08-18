@@ -7,20 +7,20 @@ def convertBoard(board):
         boardPrint.append(board[i:i + boardS])
     return boardPrint
 
-def printBoard(): #prints the board niceley
+def printBoard(): #prints the board nicely
     boardPrint = convertBoard(board)
     for i in boardPrint:
         print(str(i))
 
-def nextPlayer(currentPlayer,ammount): #Alternates between players
-    if(currentPlayer >= ammount):
+def nextPlayer(currentPlayer,amount): #Alternates between players
+    if(currentPlayer >= amount):
         currentPlayer = 1
     else:
         currentPlayer += 1
     return currentPlayer
 
 winName = ""
-def listEqual(name): #Checks if all elements of a list are equall
+def listEqual(name): #Checks if all elements of a list are equal
     global playing,winName
     winName = name
     if name.count(name[0]) == len(name) and name[0] != 0:
@@ -104,19 +104,19 @@ printBoard()
 
 while True:
     try:   
-        ammount = int(input("How many players: "))
-        if ammount >= 1:
+        amount = int(input("How many players: "))
+        if amount >= 1:
             break
     except:
         continue
 
 players = []
-if(ammount == 1):
+if(amount == 1):
     players = ["O"]
-elif(ammount == 2):
+elif(amount == 2):
     players = ["O","X"]
 else:
-    for i in range(ammount):
+    for i in range(amount):
         players.append(input(f"Choose the mark for player {i}: "))
 
 currentPlayer = 1
@@ -137,6 +137,8 @@ while playing: #Play loop
                 print(f"Invalid input, pick a position between 1 and {boardS**2}.")
         elif(edit == "exit"):
                 exit()
+        elif(edit == 'quit'):
+            exit()
         else:
             print("Invalid input, type a number.")
     
@@ -146,13 +148,13 @@ while playing: #Play loop
     
 
 
-    currentPlayer = nextPlayer(currentPlayer,ammount)
+    currentPlayer = nextPlayer(currentPlayer,amount)
 
     if(len([index for index, letter in enumerate(board) if(letter == 0)]) == 0):
             print("Tie!")
             exit()
 
-    if ammount <= 1:
+    if amount <= 1:
         board[compMove(board)] = "X"
         printBoard()
 
